@@ -19,7 +19,7 @@
 require 'strscan'
 
 class CaseFinder
-  PATH = File.expand_path("../../../../share/test/data/schema-tests.txt", __FILE__)
+  PATH = File.expand_path("../../share/test/data/schema-tests.txt", __FILE__)
 
   Case = Struct.new(:id, :input, :canonical, :fingerprint)
 
