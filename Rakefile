@@ -16,7 +16,9 @@
 
 require 'rubygems'
 require 'echoe'
-VERSION = '1.8.2'
+
+VERSION = File.open('VERSION').read.chomp
+
 Echoe.new('avro', VERSION) do |p|
   p.author = "Apache Software Foundation"
   p.email = "dev@avro.apache.org"
