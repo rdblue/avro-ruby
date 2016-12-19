@@ -1,3 +1,6 @@
 [submodule "share"]
 	path = share
 	url = https://github.com/rdblue/avro-shared.git
+[submodule "interop/data"]
+	path = interop/data
+	url = https://github.com/rdblue/avro-interop.git
