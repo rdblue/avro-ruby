@@ -23,7 +23,7 @@ class TestInterop < Test::Unit::TestCase
   HERE = File.expand_path(File.dirname(__FILE__))
   SHARE = HERE + '/../share'
   SCHEMAS = SHARE + '/test/schemas'
-  Dir[HERE + '/interop/data/*'].each do |fn|
+  Dir[HERE + '/data/*.avro'].each do |fn|
     define_method("test_read_#{File.basename(fn, 'avro')}") do
       projection = Avro::Schema.parse(File.read(SCHEMAS+'/interop.avsc'))
 
