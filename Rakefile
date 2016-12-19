@@ -29,6 +29,8 @@ Echoe.new('avro', VERSION) do |p|
   p.licenses = ["Apache License 2.0 (Apache-2.0)"]
 end
 
+task :test => [:interop]
+
 t = Rake::TestTask.new(:interop)
 t.pattern = 'interop/test*.rb'
 
