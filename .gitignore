@@ -9,3 +9,5 @@
 test-output
 tmp
 data.avr
+pkg
+dist

@@ -38,9 +38,11 @@ task :generate_interop do
   require 'avro'
   require 'random_data'
 
+  mkdir_p HERE + "/interop/data"
+
   schema = Avro::Schema.parse(File.read(SCHEMAS + '/interop.avsc'))
   r = RandomData.new(schema, ENV['SEED'])
-  f = File.open(BUILD + '/interop/data/ruby.avro', 'w')
+  f = File.open(HERE + '/interop/data/ruby.avro', 'w')
   writer = Avro::DataFile::Writer.new(f, Avro::IO::DatumWriter.new(schema), schema)
   begin
     writer << r.next
@@ -49,18 +51,17 @@ task :generate_interop do
     writer.close
   end
 
-  Avro::DataFile.open(BUILD + '/interop/data/ruby_deflate.avro', 'w', schema.to_s, :deflate) do |writer|
+  Avro::DataFile.open(HERE + '/interop/data/ruby-deflate.avro', 'w', schema.to_s, :deflate) do |writer|
     20.times { writer << r.next }
   end
 end
 
 
 HERE = File.expand_path(File.dirname(__FILE__))
-SHARE = HERE + '/../../share'
+SHARE = HERE + '/share'
 SCHEMAS = SHARE + '/test/schemas'
-BUILD = HERE + '/../../build'
 
 task :dist => [:gem] do
-  mkdir_p "../../dist/ruby"
-  cp "pkg/avro-#{VERSION}.gem", "../../dist/ruby"
+  mkdir_p "dist/"
+  cp "pkg/avro-#{VERSION}.gem", "dist/"
 end
