@@ -188,11 +188,12 @@ module Avro
       end
 
       def to_avro(names=Set.new)
-        if @name
+        props = {}
+        if defined? @name
           return fullname if names.include?(fullname)
           names << fullname
+          props['name'] = @name
         end
-        props = {'name' => @name}
         props.merge!('namespace' => @namespace) if @namespace
         super.merge props
       end
@@ -312,7 +313,7 @@ module Avro
       attr_reader :symbols
       def initialize(name, space, symbols, names=nil)
         if symbols.uniq.length < symbols.length
-          fail_msg = 'Duplicate symbol: %s' % symbols
+          fail_msg = 'Duplicate symbol: %s' % [symbols]
           raise Avro::SchemaParseError, fail_msg
         end
         super(:enum, name, space, names)

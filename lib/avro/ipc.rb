@@ -74,10 +74,10 @@ module Avro::IPC
 
   class ConnectionClosedException < Avro::AvroError; end
 
+  # Base class for the client side of a protocol interaction.
   class Requestor
-    """Base class for the client side of a protocol interaction."""
-    attr_reader :local_protocol, :transport
-    attr_accessor :remote_protocol, :remote_hash, :send_protocol
+    attr_reader :local_protocol, :transport, :remote_protocol, :remote_hash
+    attr_accessor :send_protocol
 
     def initialize(local_protocol, transport)
       @local_protocol = local_protocol
